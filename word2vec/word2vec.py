@@ -1,20 +1,20 @@
-# from nltk.corpus import stopwords 
-# #from nltk.stem.wordnet import WordNetLemmatizer
-# import string
-# stop = set(stopwords.words('english'))
-# exclude = set(string.punctuation) 
-# lemma = WordNetLemmatizer()
+from nltk.corpus import stopwords 
+from nltk.stem.wordnet import WordNetLemmatizer
+import string
+stop = set(stopwords.words('english'))
+exclude = set(string.punctuation) 
+lemma = WordNetLemmatizer()
 
 import re
 import gensim
 from gensim import corpora
 
 
-# def clean(doc):
-#     stop_free = " ".join([i for i in doc.lower().split() if i not in stop])
-#     punc_free = ''.join(ch for ch in stop_free if ch not in exclude)
-#     normalized = " ".join(lemma.lemmatize(word) for word in punc_free.split())
-#     return normalized
+def clean(doc):
+    stop_free = " ".join([i for i in doc.lower().split() if i not in stop])
+    punc_free = ''.join(ch for ch in stop_free if ch not in exclude)
+    normalized = " ".join(lemma.lemmatize(word) for word in punc_free.split())
+    return normalized
 
 
 mylines = []
@@ -34,7 +34,7 @@ with open(filepath, encoding='utf-8' ) as fp:
         
 # print(mylines)
 
-doc_clean = [doc.split() for doc in mylines]
+doc_clean = [clean(doc).split() for doc in mylines]
 
 # print(doc_clean)
 
@@ -120,7 +120,7 @@ for i in range(0,len(mcorp),2):
 
         
         
-        with open('read_output.txt1', 'a+') as f : 
+        with open('ready_output.txt', 'a+') as f : 
                 f.write("%d,%d %s \r\n" %(ttl,acl,byce+shta))
                 
                 
