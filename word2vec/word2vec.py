@@ -71,21 +71,30 @@ def w2v(fpath):
                         frequency[tok] += 1
 
         tt_corpus = [[tok for tok in titext if frequency[tok] > 1] for titext in tt_clean]
-        print(doc_corpus)
+       
+        # print(tt_corpus)
 
         ttdict = corpora.Dictionary(tt_corpus)
+        with open('title_vocab.txt', '+w') as f : 
+                        f.write(str(ttdict.token2id))
 
         docdict = corpora.Dictionary(doc_corpus)
+        with open('doc_vocab.txt', '+w') as f : 
+                        f.write(str(docdict.token2id))
 
 
 
 
         # print(dictionary) #prints number of unique tokens
-        #print(dictionary.token2id)
+        # print(ttdict.token2id)
+        #print(docdict.token2id)
         # print('Number of doc frequency: ',dictionary.dfs)
         # print('Number of docs: ',dictionary.num_docs)
         # print('Number of nonzeroes: ', dictionary.num_nnz)
         # print('Number of processed words: ', dictionary.num_pos )
+
+
+        
 
 
         dcorpus = [docdict.doc2bow(text) for text in doc_corpus]
@@ -152,10 +161,10 @@ def w2v(fpath):
 
                 
                 
-                with open('ready_output2sfdg.txt', 'a+') as f : 
+                with open('cnbc_out.txt', 'a+') as f : 
                         f.write("%d,%d %s \r\n" %(ttl,acl,byce+shta))
                         
-                        
+                
 
         # with open('output.txt', encoding='utf-8' ) as fp: 
         #             lines = fp.readlines()
